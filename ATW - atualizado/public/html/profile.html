@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="icon" href="../assets/imagens/aviao.png">
+    <meta name="description" content="Meu Perfil">
+</head>
+
+<body>
+    <div class="profile-container">
+        <!-- Header -->
+        <header class="profile-header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../assets/imagens/aviao.png" alt="Logo">
+                    <h1>Around the World</h1>
+                </div>
+                <nav class="profile-nav">
+                    <a href="/public/html/feed.html" class="nav-link">Feed</a>
+                    <a href="/public/html/profile.html" class="nav-link active">Meu Perfil</a>
+                    <button id="logoutBtn" class="nav-link logout-btn">Sair</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="profile-content">
+            <!-- Profile Sidebar -->
+            <aside class="profile-sidebar">
+                <div class="profile-card">
+                    <div class="profile-avatar-container">
+                        <img src="../assets/imagens/aviao.png" alt="Foto do Perfil" class="profile-avatar"
+                            id="profileAvatar">
+                        <button class="change-avatar-btn" onclick="changeProfilePhoto()">📷</button>
+                        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profileName">Usuário</h2>
+                        <p id="profileEmail">usuario@email.com</p>
+                        <p id="profileDescription">Biografia de Usuário...</p>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="editProfile()">Editar Perfil
+                            </button>
+                            <button class="btn btn-secondary" onclick="openEditTravels()">Cadastrar Viagem</button>
+                            <button class="btn btn-danger" onclick="logout()">Sair
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Profile Area -->
+            <div class="profile-main">
+                <div class="profile-tabs">
+                    <button class="tab-button active" onclick="showTab('posts')">Minhas Postagens
+                    </button>
+                    <button class="tab-button" onclick="showTab('about')">Mais sobre mim...
+                    </button>
+                    <button class="tab-button" onclick="showTab('travels')">Minhas Viagens</button>
+                </div>
+
+                <!-- Posts Tab -->
+                <div id="posts" class="tab-content active">
+                    <div class="posts-grid" id="userPosts">
+                        <!-- Posts serão carregados aqui -->
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div id="about" class="tab-content">
+                    <div class="about-content">
+                        <div class="info-card">
+                            <h4>Informações gerais:</h4>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Nome de Usuário:</span>
+                                    <span class="info-value" id="aboutName">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">E-mail de usuário:</span>
+                                    <span class="info-value" id="aboutEmail">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Perfil Criado em:</span>
+                                    <span class="info-value" id="memberSince">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Último acesso:</span>
+                                    <span class="info-value" id="lastAccess">Agora</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <h4>Sobre mim</h4>
+                            <div class="company-description">
+                                <p id="companyDescription">Curiosidades sobre mim, minhas prefêrencias, gostos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="travels" class="tab-content">
+                    <div class="travels-content">
+                        <!-- Sub-abas -->
+                        <div class="travels-tabs">
+                            <button class="travel-button active" onclick="showTravelTab('been')">Já Fui</button>
+                            <button class="travel-button" onclick="showTravelTab('now')">Estou</button>
+                            <button class="travel-button" onclick="showTravelTab('will')">Vou</button>
+                        </div>
+
+                        <!-- Sub-aba: Já Fui -->
+                        <div id="been" class="travel-tab active">
+                            <div class="travel-list" id="beenList">
+                                <p>🇺🇸 Já fui para Nova York</p>
+                                <p>🇬🇧 Já fui para Londres</p>
+                                <p>🇮🇹 Já fui para Roma</p>
+                            </div>
+                        </div>
+
+                        <!-- Sub-aba: Estou -->
+                        <div id="now" class="travel-tab">
+                            <div class="travel-list" id="nowList">
+                                <p>📍 Atualmente em São Paulo, Brasil</p>
+                            </div>
+                        </div>
+
+                        <!-- Sub-aba: Vou -->
+                        <div id="will" class="travel-tab">
+                            <div class="travel-list" id="willList">
+                                <p>🎯 Vou para Paris, França</p>
+                                <p>✈️ Planejando explorar a Tailândia em breve</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditProfile()">&times;</span>
+            <h3>Editar Perfil</h3>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editName">Nome de usuário:</label>
+                    <input type="text" id="editName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">E-mail de usuário:</label>
+                    <input type="email" id="editEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDescription">Biografia do usuário</label>
+                    <textarea id="editDescription" name="description" rows="4"
+                        placeholder="Conte mais sobre você, seus gostos, preferências..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editPassword">Nova Senha (deixe em branco para manter atual):</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="editPassword" name="password" placeholder="Digite nova senha">
+                        <button type="button" class="toggle-password"
+                            onclick="toggleModalPassword('editPassword')"></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editConfirmPassword">Confirmar Nova Senha:</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="editConfirmPassword" name="confirmPassword"
+                            placeholder="Confirme a nova senha">
+                        <button type="button" class="toggle-password"
+                            onclick="toggleModalPassword('editConfirmPassword')"></button>
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-secondary">Salvar</button>
+                    <button type="button" class="btn btn-third" onclick="closeEditProfile()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Travels Modal -->
+    <div id="editTravelsModal" class="modal" style="display: none">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditTravels()">&times;</span>
+            <h3>Editar Minhas Viagens</h3>
+            <form id="editTravelsForm">
+                <div class="form-group">
+                    <label for="travelCategory">Categoria:</label>
+                    <select id="travelCategory" required>
+                        <option value="been">Já Fui</option>
+                        <option value="now">Estou</option>
+                        <option value="will">Vou</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="travelName">Destino:</label>
+                    <input type="text" id="travelName" placeholder="Ex: Nova York, EUA" required />
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-secondary">Adicionar</button>
+                    <button type="button" class="btn btn-third" onclick="closeEditTravels()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../js/profile.js"></script>
+</body>
+
+</html>

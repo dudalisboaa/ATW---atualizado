@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="icon" href="../assets/imagens/aviao.png">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-left">
+            <div class="brand-section">
+                <div class="logo">
+                    <img src="../assets/imagens/aviao.png" alt="Logo">
+                    <h1>Around The World</h1>
+                </div>
+                <div class="login-footer">
+                    <p>Ainda não tem uma conta? <a href="./cadastro.html" class="signup-link">Cadastre-se</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-right">
+            <div class="login-form-container">
+                <div class="login-header">
+                    <h2>Bem-vindo de volta!</h2>
+                    <p>Faça seu login para acessar sua conta</p>
+                </div>
+
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha">Senha:</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="senha" name="senha" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Entrar</span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="../js/login.js"></script>
+</body>
+
+</html>

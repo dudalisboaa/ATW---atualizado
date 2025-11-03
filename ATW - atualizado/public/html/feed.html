@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feed de Postagens</title>
+    <link rel="stylesheet" href="../css/feed.css" />
+    <link rel="icon" href="../assets/imagens/aviao.png" />
+</head>
+
+<body>
+    
+    <div class="page-container">
+        <aside class="sidebar">
+            <div class="user-profile">
+                <img src="../assets/imagens/aviao.png" alt="Logo" class="profile-avatar" />
+                <h1>Around the World</h1>
+                <span id=headerUserName class="profile-name">Usuário</span>
+                <span id="headerUserEmail" class="profile-email">E-mail do Usuário</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" id="show-feed" class="active"><i class="fa-solid fa-plane"></i> Feed</a>
+                <a href="#" id="show-create-post"><i class="fa-solid fa-plus-circle"></i> Criar Postagem</a>
+                <a href="#" id="profileBtn" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i>Perfil</a>
+                <a href="#" id="chatBtn" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i>Chat</a>
+                <a href="#" id="logoutBtn" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="feed-page" class="feed-section">
+                <div id="postsContainer" class="posts-container">
+                    <div class="loading">
+                        <p>Carregando postagens...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="create-post-page" class="create-post-section" style="display: none;">
+                <div class="create-post-card">
+                    <h2>Compartilhe suas experiências!</h2>
+                    <form id="createPostForm" class="create-post-form">
+                        <textarea id="postContent" name="content"
+                            placeholder="Compartilhe suas experiências com outros viajantes..." rows="3"
+                            maxlength="500"></textarea>
+
+                        <div class="photo-upload-section">
+                            <input type="file" id="photoInput" name="photo" accept="image/*" style="display: none;" />
+                            <!-- <button type="button" class="photo-btn"
+                                onclick="document.getElementById('photoInput').click()">
+                                📷 Adicionar Foto
+                            </button> -->
+                            <div id="photoPreview" class="photo-preview" style="display: none;">
+                                <img id="previewImage" src="" alt="Preview" />
+                                <button type="button" class="remove-photo" onclick="removePhoto()">X</button>
+                            </div>
+                        </div>
+
+                        <div class="post-actions">
+                            <span class="character-count">0/500</span>
+                            <button type="submit" class="btn btn-primary">Publicar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const feedPage = document.getElementById('feed-page');
+            const createPostPage = document.getElementById('create-post-page');
+            const showFeedLink = document.getElementById('show-feed');
+            const showCreatePostLink = document.getElementById('show-create-post');
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+            function showPage(pageToShow) {
+                // Esconde todas as páginas
+                feedPage.style.display = 'none';
+                createPostPage.style.display = 'none';
+
+                // Mostra a página selecionada
+                pageToShow.style.display = 'block';
+
+                // Atualiza a classe 'active' nos links de navegação
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (pageToShow === feedPage) {
+                    showFeedLink.classList.add('active');
+                } else {
+                    showCreatePostLink.classList.add('active');
+                }
+            }
+
+            showFeedLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(feedPage);
+            });
+
+            showCreatePostLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(createPostPage);
+            });
+
+            // Inicializa a página mostrando o feed por padrão
+            showPage(feedPage);
+        });
+
+        // Funções para controle de fotos, etc. (se necessário)
+        function removePhoto() {
+            // ... lógica para remover a foto ...
+        }
+    </script>
+
+    <script src="../js/feed.js"></script>
+</body
+
+</html>
