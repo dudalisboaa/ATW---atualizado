@@ -3,8 +3,8 @@ const mysql = require('mysql2/promise');
 const dbConfig = {
   host: 'localhost',
   user: 'root',
-  password: 'MelS2809',
-  database: 'atw_atualizado',
+  password: 'root',
+  database: 'ATW2',
   port: 3306,
   charset: 'utf8mb4'
 };
